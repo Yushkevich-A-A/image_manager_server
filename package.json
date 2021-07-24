@@ -1,0 +1,28 @@
+{
+  "name": "image_manager_server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "prestart": "npm install",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "forever server.js",
+    "watch": "forever -w server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yushkevich-A-A/image_manager_server.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Yushkevich-A-A/image_manager_server/issues"
+  },
+  "homepage": "https://github.com/Yushkevich-A-A/image_manager_server#readme",
+  "dependencies": {
+    "forever": "^4.0.1",
+    "koa": "^2.13.1",
+    "koa-body": "^4.2.0",
+    "uuid": "^8.3.2"
+  }
+}
