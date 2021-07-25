@@ -30,12 +30,12 @@ app.use( async (ctx) => {
       file = ctx.request.files.file;
   }
 
-  const { method } = data;
+  const { method, fileId } = data;
 
   ctx.response.set({
     'Access-Control-Allow-Origin': '*',
   })
-  console.log(33);
+  
   switch (method) {
     case 'addImage':
     //     const arr = controller.getAllTickets();
@@ -53,7 +53,7 @@ app.use( async (ctx) => {
       writeStream.on('error', callback);
 
       writeStream.on('close', () => {
-        // fs.unlink(oldPath, callback);
+        fs.unlink(oldPath, callback);
         console.log('close');
         resolve(fileName);
       });
@@ -61,13 +61,30 @@ app.use( async (ctx) => {
       readStream.pipe(writeStream);
     });
 
+    arrImg.push(link);
+
     ctx.response.body = link;
     ctx.response.status = 200;
     return;
 
-    case 'deleteImage':
-    //   const arr = controller.getAllTickets();
+    case 'getAllImages' :
+      ctx.response.body = arrImg;
+      ctx.response.status = 200;
+      return;  
 
+    case 'deleteImage':
+      // const link = await new Promise((resolve, reject) => {
+      //   const callback = (error) => reject(error);
+      //   fs.rm(public + fileId, callback);
+      //   });
+      fs.unlink(`${public}/${fileId}`, (err) => {
+        if (err) {
+          throw err;
+        }
+        console.log('deleted');
+      });
+      arrImg.splice(arrImg.findIndex( item => item === fileId ), 1);
+      ctx.response.body = true;
       ctx.response.status = 200;
       return;
 
