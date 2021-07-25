@@ -73,10 +73,6 @@ app.use( async (ctx) => {
       return;  
 
     case 'deleteImage':
-      // const link = await new Promise((resolve, reject) => {
-      //   const callback = (error) => reject(error);
-      //   fs.rm(public + fileId, callback);
-      //   });
       fs.unlink(`${public}/${fileId}`, (err) => {
         if (err) {
           throw err;
