@@ -9,6 +9,7 @@ const koaStatic = require('koa-static');
 
 
 const public = path.join(__dirname, '/public');
+const arrImg = [];
 
 app.use( koaBody({
   urlencoded: true,
@@ -17,7 +18,8 @@ app.use( koaBody({
 
 app.use( koaStatic(public));
 
-const arrImg = [];
+
+const port = process.env.PORT || 7070;
 
 app.use( async (ctx) => {
 
@@ -89,7 +91,5 @@ app.use( async (ctx) => {
       return;
   }
 });
-
-const port = process.env.PORT || 7070;
 
 const server = http.createServer(app.callback()).listen(port);
